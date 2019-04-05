@@ -40,7 +40,7 @@ public class StrategyBasedMoveService implements MoveService {
         MOVE attemptMove = move;
 
         while (remainingMoves.size() > 0 && !isSafe(attemptMove, battleSnakeRequest)) {
-            attemptMove = moveStrategyFactory.moveStrategy("fallback").move(battleSnakeRequest);
+            attemptMove = moveStrategyFactory.fallBackMoveStrategy().move(battleSnakeRequest);
 
             if (remainingMoves.contains(attemptMove)) {
                 remainingMoves.remove(attemptMove);

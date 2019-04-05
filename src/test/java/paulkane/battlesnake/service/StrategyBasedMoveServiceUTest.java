@@ -34,6 +34,7 @@ public class StrategyBasedMoveServiceUTest {
     @Before
     public void setup() {
         when(moveStrategyFactory.moveStrategy(anyString())).thenReturn(moveStrategy);
+        when(moveStrategyFactory.fallBackMoveStrategy()).thenReturn(moveStrategy);
         when(moveStrategy.move(any(BattleSnakeRequest.class))).thenReturn(MOVE.UP);
     }
 

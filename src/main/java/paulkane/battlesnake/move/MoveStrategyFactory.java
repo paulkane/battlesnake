@@ -45,7 +45,7 @@ public class MoveStrategyFactory {
         return moveStrategies.get(moveStrategyDefault);
     }
 
-    MoveStrategy fallBackMoveStrategy() {
+    public MoveStrategy fallBackMoveStrategy() {
         return moveStrategies.get(moveStrategyFallback);
     }
 
