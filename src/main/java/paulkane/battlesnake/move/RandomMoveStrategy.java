@@ -7,12 +7,12 @@ import paulkane.battlesnake.model.domain.MOVE;
 import java.util.Random;
 
 @Component
-public class FallBackMoveStrategy implements MoveStrategy {
+public class RandomMoveStrategy implements MoveStrategy {
     private Random random = new Random();
 
     @Override
     public String getName() {
-        return "fallback";
+        return "random";
     }
 
     @Override

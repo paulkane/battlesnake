@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.MoveResponse;
 import paulkane.battlesnake.model.StartResponse;
+import paulkane.battlesnake.model.domain.Snake;
 
 /*
 http://10.194.195.169:8080
@@ -30,14 +31,18 @@ public class Controller {
 
     @PostMapping("/move")
     public MoveResponse move(@RequestBody BattleSnakeRequest moveRequest) {
-        log.info(moveRequest.getYou().getHealth() + ":" + moveRequest.getYou().getBody().toString());
+        Snake you = moveRequest.getYou();
+        String name = you.getName();
+        int turn = moveRequest.getTurn();
+        log.info("{}-{}: [{}] {}", turn, name, you.getHealth(), you.getBody().toString());
         MoveResponse move = moveService.move(moveRequest);
-        log.info("moved=" + move.getMove());
+        log.info("{}-{}: moved={}", turn, name, move.getMove());
         return move;
     }
 
     @PostMapping("/end")
     public void end(@RequestBody BattleSnakeRequest endRequest) {
+        log.info("==========================Game Ended==========================");
     }
 
     @PostMapping("/ping")
