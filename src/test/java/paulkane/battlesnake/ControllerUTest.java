@@ -22,6 +22,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static paulkane.battlesnake.model.domain.HEAD_TYPE.BENDR;
 import static paulkane.battlesnake.model.domain.HEAD_TYPE.SAND_WORM;
 import static paulkane.battlesnake.model.domain.TAIL_TYPE.PIXEL;
 
@@ -37,7 +38,7 @@ public class ControllerUTest {
         when(startService.start(any(BattleSnakeRequest.class)))
             .thenReturn(StartResponse.builder()
                 .color("#ff00ff")
-                .headType(SAND_WORM)
+                .headType(BENDR)
                 .tailType(PIXEL)
                 .build());
         this.mockMvc
@@ -60,7 +61,7 @@ public class ControllerUTest {
     @Test
     public void testMove() throws Exception {
         when(moveService.move(any(BattleSnakeRequest.class)))
-            .thenReturn(MoveResponse.builder().move(MOVE.up)
+            .thenReturn(MoveResponse.builder().move(MOVE.UP)
                 .build());
         this.mockMvc
             .perform(

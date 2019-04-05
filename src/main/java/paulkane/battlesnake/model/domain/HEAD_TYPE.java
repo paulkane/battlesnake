@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 
 public enum HEAD_TYPE {
     REGULAR("regular"),
-    BELUGA("beluga")    ,
+    BELUGA("beluga"),
     BENDR("bendr"),
     DEAD("dead"),
     EVIL("evil"),

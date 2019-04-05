@@ -1,9 +1,6 @@
 package paulkane.battlesnake.service;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit4.SpringRunner;
 import paulkane.battlesnake.model.StartResponse;
 import paulkane.battlesnake.model.domain.HEAD_TYPE;
 import paulkane.battlesnake.model.domain.TAIL_TYPE;

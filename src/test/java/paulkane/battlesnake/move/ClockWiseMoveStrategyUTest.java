@@ -1,19 +1,16 @@
 package paulkane.battlesnake.move;
 
 import org.junit.Test;
-import paulkane.battlesnake.model.BattleSnakeRequest;
-import paulkane.battlesnake.model.domain.Board;
-import paulkane.battlesnake.model.domain.Body;
 import paulkane.battlesnake.model.domain.MOVE;
-import paulkane.battlesnake.model.domain.Snake;
-
-import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static paulkane.battlesnake.model.domain.MOVE.down;
-import static paulkane.battlesnake.model.domain.MOVE.left;
-import static paulkane.battlesnake.model.domain.MOVE.right;
-import static paulkane.battlesnake.model.domain.MOVE.up;
+import static paulkane.battlesnake.SnakeHelper.battleSnakeRequest;
+import static paulkane.battlesnake.SnakeHelper.body;
+import static paulkane.battlesnake.SnakeHelper.snake;
+import static paulkane.battlesnake.model.domain.MOVE.DOWN;
+import static paulkane.battlesnake.model.domain.MOVE.LEFT;
+import static paulkane.battlesnake.model.domain.MOVE.RIGHT;
+import static paulkane.battlesnake.model.domain.MOVE.UP;
 
 public class ClockWiseMoveStrategyUTest {
 
@@ -22,54 +19,37 @@ public class ClockWiseMoveStrategyUTest {
     @Test
     public void in0_0Corner() {
         MOVE newMove =
-            clockWiseMoveStrategy.move(getRequest(
+            clockWiseMoveStrategy.move(battleSnakeRequest(
                 snake(body(0, 0), body(1, 0))
             ));
-        assertThat(newMove).isEqualTo(up);
+        assertThat(newMove).isEqualTo(UP);
     }
 
     @Test
     public void in15_0Corner() {
         MOVE newMove =
-            clockWiseMoveStrategy.move(getRequest(
+            clockWiseMoveStrategy.move(battleSnakeRequest(
                 snake(body(14, 0), body(14, 1))
             ));
-        assertThat(newMove).isEqualTo(right);
+        assertThat(newMove).isEqualTo(RIGHT);
     }
 
     @Test
     public void in15_15Corner() {
         MOVE newMove =
-            clockWiseMoveStrategy.move(getRequest(
+            clockWiseMoveStrategy.move(battleSnakeRequest(
                 snake(body(14, 14), body(13, 14))
             ));
-        assertThat(newMove).isEqualTo(down);
+        assertThat(newMove).isEqualTo(DOWN);
     }
 
     @Test
     public void in0_15Corner() {
         MOVE newMove =
-            clockWiseMoveStrategy.move(getRequest(
+            clockWiseMoveStrategy.move(battleSnakeRequest(
                 snake(body(0, 14), body(0, 13))
             ));
-        assertThat(newMove).isEqualTo(left);
-    }
-
-    private Snake snake(Body... body) {
-        return Snake.builder().body(Arrays.asList(body)).build();
-    }
-
-    private Body body(int x, int y) {
-        return Body.builder().x(x).y(y).build();
-    }
-
-    private BattleSnakeRequest getRequest(Snake you) {
-        return BattleSnakeRequest.builder()
-            .board(
-                Board.builder().height(15).width(15).build()
-            )
-            .you(you)
-            .build();
+        assertThat(newMove).isEqualTo(LEFT);
     }
 }
 

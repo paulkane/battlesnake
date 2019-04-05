@@ -28,36 +28,36 @@ public class ClockWiseMoveStrategy implements MoveStrategy {
             neck = head;
         }
 
-        MOVE direction = MOVE.left;
+        MOVE direction = MOVE.LEFT;
 
         if (head.equals(neck)) {
-            return MOVE.down;
+            return MOVE.DOWN;
         }
 
         if (head.getX() == neck.getX()) {
             if (head.getY() == moveRequest.getBoard().getHeight() - 1) {
-                return MOVE.left;
+                return MOVE.LEFT;
             }
             if (head.getY() > neck.getY()) {
-                return MOVE.down;
+                return MOVE.DOWN;
             }
             if (head.getY() == 0) {
-                return MOVE.right;
+                return MOVE.RIGHT;
             }
-            return MOVE.up;
+            return MOVE.UP;
         }
 
         if (head.getY() == neck.getY()) {
             if (head.getX() == 0) {
-                return MOVE.up;
+                return MOVE.UP;
             }
             if (head.getX() < neck.getX()) {
-                return MOVE.left;
+                return MOVE.LEFT;
             }
             if (head.getX() == moveRequest.getBoard().getWidth() - 1) {
-                return MOVE.down;
+                return MOVE.DOWN;
             }
-            return MOVE.right;
+            return MOVE.RIGHT;
         }
 
         return direction;
