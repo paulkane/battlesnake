@@ -14,7 +14,7 @@ import static paulkane.battlesnake.model.domain.MOVE.UP;
 
 public class ClockWiseMoveStrategyUTest {
 
-    private ClockWiseMoveStrategy clockWiseMoveStrategy = new ClockWiseMoveStrategy();
+    private final ClockWiseMoveStrategy clockWiseMoveStrategy = new ClockWiseMoveStrategy();
 
     @Test
     public void in0_0Corner() {

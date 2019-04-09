@@ -13,7 +13,7 @@ public class MoveStrategyFactory {
     private final String snakeNamePrefix;
     private final String moveStrategyDefault;
     private final String moveStrategyFallback;
-    private Map<String, MoveStrategy> moveStrategies = new HashMap<>();
+    private final Map<String, MoveStrategy> moveStrategies = new HashMap<>();
 
     public MoveStrategyFactory(@Value("${snake.name.prefix:}") String snakeNamePrefix,
                                @Value("${move.strategy.default}") String moveStrategyDefault,

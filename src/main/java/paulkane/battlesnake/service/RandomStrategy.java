@@ -7,7 +7,7 @@ import java.util.Random;
 @Component
 public class RandomStrategy {
 
-    private Random random = new Random();
+    private final Random random = new Random();
 
     public int getNextInt(int bound) {
         return random.nextInt(bound);

@@ -14,7 +14,7 @@ import static paulkane.battlesnake.model.domain.MOVE.UP;
 
 public class SnakeSafetyUTest {
 
-    private SnakeSafety snakeSafety = new SnakeSafety();
+    private final SnakeSafety snakeSafety = new SnakeSafety();
 
     @Test
     public void givenAnotherSnakeNextToMeDoNotCrashIntoIt_UP() {

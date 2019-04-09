@@ -8,7 +8,7 @@ public enum MOVE {
     LEFT("left"),
     RIGHT("right");
 
-    String value;
+    private final String value;
 
     MOVE(String value) {
         this.value = value;

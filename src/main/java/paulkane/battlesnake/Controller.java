@@ -10,14 +10,14 @@ import paulkane.battlesnake.model.StartResponse;
 import paulkane.battlesnake.model.domain.Snake;
 
 /*
-http://10.194.195.169:8080
+http://10.194.194.143:8080
  */
 @Slf4j
 @RestController
 public class Controller {
 
-    private StartService startService;
-    private MoveService moveService;
+    private final StartService startService;
+    private final MoveService moveService;
 
     public Controller(StartService startService, MoveService moveService) {
         this.startService = startService;
@@ -43,6 +43,15 @@ public class Controller {
     @PostMapping("/end")
     public void end(@RequestBody BattleSnakeRequest endRequest) {
         log.info("==========================Game Ended==========================");
+        log.info("Winner was={}", getWinner(endRequest));
+        log.info("==========================Game Ended==========================");
+    }
+
+    private String getWinner(BattleSnakeRequest endRequest) {
+        if (endRequest.getBoard().getSnakes().size() > 0) {
+            return endRequest.getBoard().getSnakes().get(0).getName();
+        }
+        return "a draw";
     }
 
     @PostMapping("/ping")

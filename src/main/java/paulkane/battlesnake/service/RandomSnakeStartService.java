@@ -11,7 +11,7 @@ import paulkane.battlesnake.model.domain.TAIL_TYPE;
 public class RandomSnakeStartService implements StartService {
 
     private static final String RED = "#ff0000";
-    private RandomStrategy randomStrategy;
+    private final RandomStrategy randomStrategy;
 
     public RandomSnakeStartService(RandomStrategy randomStrategy) {
         this.randomStrategy = randomStrategy;

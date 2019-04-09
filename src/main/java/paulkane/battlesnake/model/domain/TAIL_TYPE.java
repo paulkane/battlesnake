@@ -16,7 +16,7 @@ public enum TAIL_TYPE {
     SKINNY("skinny"),
     SMALL_RATTLE("small-rattle");
 
-    String value;
+    private final String value;
 
     TAIL_TYPE(String value) {
         this.value = value;

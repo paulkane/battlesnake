@@ -23,7 +23,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static paulkane.battlesnake.model.domain.HEAD_TYPE.BENDR;
-import static paulkane.battlesnake.model.domain.HEAD_TYPE.SAND_WORM;
 import static paulkane.battlesnake.model.domain.TAIL_TYPE.PIXEL;
 
 @RunWith(SpringRunner.class)

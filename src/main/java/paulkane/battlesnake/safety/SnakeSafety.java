@@ -1,6 +1,5 @@
 package paulkane.battlesnake.safety;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.domain.Body;
@@ -17,7 +16,7 @@ public class SnakeSafety implements MoveSafety {
 
         Body head = battleSnakeRequest.getYou().getBody().get(0);
 
-        Body moveTo = (Body) Body.builder().x(head.getX()).y(head.getY()).build();
+        Body moveTo = Body.builder().x(head.getX()).y(head.getY()).build();
 
         switch (move) {
             case UP:

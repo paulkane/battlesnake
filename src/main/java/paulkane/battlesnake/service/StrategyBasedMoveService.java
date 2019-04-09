@@ -14,8 +14,8 @@ import java.util.List;
 
 @Service
 public class StrategyBasedMoveService implements MoveService {
-    private MoveStrategyFactory moveStrategyFactory;
-    private List<MoveSafety> moveSafetyList;
+    private final MoveStrategyFactory moveStrategyFactory;
+    private final List<MoveSafety> moveSafetyList;
 
     public StrategyBasedMoveService(MoveStrategyFactory moveStrategyFactory, List<MoveSafety> moveSafetyList) {
         this.moveStrategyFactory = moveStrategyFactory;

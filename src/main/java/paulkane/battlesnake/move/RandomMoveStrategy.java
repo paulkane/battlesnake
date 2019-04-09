@@ -8,7 +8,7 @@ import java.util.Random;
 
 @Component
 public class RandomMoveStrategy implements MoveStrategy {
-    private Random random = new Random();
+    private final Random random = new Random();
 
     @Override
     public String getName() {

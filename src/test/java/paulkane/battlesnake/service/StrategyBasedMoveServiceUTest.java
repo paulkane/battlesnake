@@ -25,10 +25,10 @@ import static paulkane.battlesnake.SnakeHelper.snake;
 
 public class StrategyBasedMoveServiceUTest {
 
-    private MoveStrategyFactory moveStrategyFactory = mock(MoveStrategyFactory.class);
-    private MoveStrategy moveStrategy = mock(MoveStrategy.class);
-    private List<MoveSafety> moveSafetyList = Lists.newArrayList(new WallSafety(), new SnakeSafety());
-    private StrategyBasedMoveService strategyBasedMoveService = new StrategyBasedMoveService(moveStrategyFactory,
+    private final MoveStrategyFactory moveStrategyFactory = mock(MoveStrategyFactory.class);
+    private final MoveStrategy moveStrategy = mock(MoveStrategy.class);
+    private final List<MoveSafety> moveSafetyList = Lists.newArrayList(new WallSafety(), new SnakeSafety());
+    private final StrategyBasedMoveService strategyBasedMoveService = new StrategyBasedMoveService(moveStrategyFactory,
         moveSafetyList);
 
     @Before

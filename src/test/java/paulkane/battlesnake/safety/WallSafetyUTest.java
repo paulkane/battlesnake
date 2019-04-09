@@ -10,7 +10,7 @@ import static paulkane.battlesnake.SnakeHelper.snake;
 
 public class WallSafetyUTest {
 
-    private WallSafety wallSafety = new WallSafety();
+    private final WallSafety wallSafety = new WallSafety();
 
     @Test
     public void givenImAtTheTopCannotGoUp() {

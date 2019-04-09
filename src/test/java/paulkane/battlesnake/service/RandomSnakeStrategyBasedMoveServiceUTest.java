@@ -11,8 +11,8 @@ import static org.mockito.Mockito.when;
 
 public class RandomSnakeStrategyBasedMoveServiceUTest {
 
-    private RandomStrategy randomStrategy = mock(RandomStrategy.class);
-    private RandomSnakeStartService randomSnakeStartService = new RandomSnakeStartService(randomStrategy);
+    private final RandomStrategy randomStrategy = mock(RandomStrategy.class);
+    private final RandomSnakeStartService randomSnakeStartService = new RandomSnakeStartService(randomStrategy);
 
     @Test
     public void testStart() {

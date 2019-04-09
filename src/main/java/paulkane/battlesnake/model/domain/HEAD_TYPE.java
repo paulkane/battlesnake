@@ -17,7 +17,7 @@ public enum HEAD_TYPE {
     SMILE("smile"),
     TONGUE("tongue");
 
-    String value;
+    private final String value;
 
     HEAD_TYPE(String value) {
         this.value = value;
