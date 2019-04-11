@@ -12,8 +12,8 @@ import static paulkane.battlesnake.SnakeHelper.snake;
 
 public class HungryFoodStrategyUTest {
 
-    private ClockWiseMoveStrategy clockWiseMoveStrategy = mock(ClockWiseMoveStrategy.class);
-    private EagerFoodStrategy eagerFoodStrategy = mock(EagerFoodStrategy.class);
+    private final ClockWiseMoveStrategy clockWiseMoveStrategy = mock(ClockWiseMoveStrategy.class);
+    private final EagerFoodStrategy eagerFoodStrategy = mock(EagerFoodStrategy.class);
     private final HungryFoodStrategy hungryFoodStrategy =
         new HungryFoodStrategy(clockWiseMoveStrategy, eagerFoodStrategy);
 

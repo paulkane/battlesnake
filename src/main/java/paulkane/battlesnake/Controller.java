@@ -21,7 +21,7 @@ public class Controller {
 
     private final StartService startService;
     private final MoveService moveService;
-    private ObjectMapper objectMapper = new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     public Controller(StartService startService, MoveService moveService) {
         this.startService = startService;
