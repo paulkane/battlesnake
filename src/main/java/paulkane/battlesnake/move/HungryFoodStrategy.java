@@ -23,7 +23,7 @@ public class HungryFoodStrategy implements MoveStrategy {
 
     @Override
     public MOVE move(BattleSnakeRequest moveRequest) {
-        if (moveRequest.getYou().getHealth() > 50) {
+        if (moveRequest.getYou().getHealth() > 20) {
             return clockWiseMoveStrategy.move(moveRequest);
         }
         return eagerFoodStrategy.move(moveRequest);
