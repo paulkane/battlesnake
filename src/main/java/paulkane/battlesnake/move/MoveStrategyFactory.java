@@ -53,6 +53,7 @@ public class MoveStrategyFactory {
         if (strategyName.startsWith(snakeNamePrefix)) {
             return strategyName.substring(snakeNamePrefix.length());
         }
+
         return strategyName;
     }
 }

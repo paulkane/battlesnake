@@ -17,10 +17,10 @@ import static paulkane.battlesnake.SnakeHelper.body;
 import static paulkane.battlesnake.SnakeHelper.food;
 import static paulkane.battlesnake.SnakeHelper.snake;
 
-public class NearestFoodStrategyUTest {
+public class EagerFoodStrategyUTest {
 
     private final MoveStrategyFactory moveStrategyFactory = mock(MoveStrategyFactory.class);
-    private final NearestFoodStrategy nearestFoodStrategy = new NearestFoodStrategy(moveStrategyFactory, "test");
+    private final EagerFoodStrategy eagerFoodStrategy = new EagerFoodStrategy();
 
     @Before
     public void setup() {
@@ -32,7 +32,7 @@ public class NearestFoodStrategyUTest {
         List<Food> foods = List.of(food(5, 6), food(6, 7), food(7, 6));
         BattleSnakeRequest moveRequest = battleSnakeRequest(snake(body(5, 5)));
         moveRequest.getBoard().setFood(foods);
-        MOVE move = nearestFoodStrategy.move(moveRequest);
+        MOVE move = eagerFoodStrategy.move(moveRequest);
 
         assertThat(move).isEqualTo(MOVE.DOWN);
     }
@@ -42,7 +42,7 @@ public class NearestFoodStrategyUTest {
         List<Food> foods = List.of(food(5, 4), food(6, 7), food(7, 6));
         BattleSnakeRequest moveRequest = battleSnakeRequest(snake(body(5, 5)));
         moveRequest.getBoard().setFood(foods);
-        MOVE move = nearestFoodStrategy.move(moveRequest);
+        MOVE move = eagerFoodStrategy.move(moveRequest);
 
         assertThat(move).isEqualTo(MOVE.UP);
     }
@@ -52,7 +52,7 @@ public class NearestFoodStrategyUTest {
         List<Food> foods = List.of(food(4, 5), food(6, 7), food(7, 6));
         BattleSnakeRequest moveRequest = battleSnakeRequest(snake(body(5, 5)));
         moveRequest.getBoard().setFood(foods);
-        MOVE move = nearestFoodStrategy.move(moveRequest);
+        MOVE move = eagerFoodStrategy.move(moveRequest);
 
         assertThat(move).isEqualTo(MOVE.LEFT);
     }
@@ -62,17 +62,17 @@ public class NearestFoodStrategyUTest {
         List<Food> foods = List.of(food(6, 5), food(6, 7), food(7, 6));
         BattleSnakeRequest moveRequest = battleSnakeRequest(snake(body(5, 5)));
         moveRequest.getBoard().setFood(foods);
-        MOVE move = nearestFoodStrategy.move(moveRequest);
+        MOVE move = eagerFoodStrategy.move(moveRequest);
 
         assertThat(move).isEqualTo(MOVE.RIGHT);
     }
 
     @Test
-    public void goClockWiseWhenThereIsNoFood() {
+    public void goUPWhenThereIsNoFood() {
         BattleSnakeRequest moveRequest = battleSnakeRequest(snake(body(5, 5)));
-        MOVE move = nearestFoodStrategy.move(moveRequest);
+        MOVE move = eagerFoodStrategy.move(moveRequest);
 
-        assertThat(move).isEqualTo(MOVE.DOWN);
+        assertThat(move).isEqualTo(MOVE.UP);
     }
 
     @Test
@@ -80,7 +80,7 @@ public class NearestFoodStrategyUTest {
         List<Food> foods = List.of(food(0, 0), food(15, 15), food(7, 5));
         BattleSnakeRequest moveRequest = battleSnakeRequest(snake(body(5, 5)), snake(body(6, 5)));
         moveRequest.getBoard().setFood(foods);
-        MOVE move = nearestFoodStrategy.move(moveRequest);
+        MOVE move = eagerFoodStrategy.move(moveRequest);
 
         assertThat(move).isEqualTo(MOVE.RIGHT);
     }

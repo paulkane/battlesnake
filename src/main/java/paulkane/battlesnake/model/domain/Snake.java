@@ -16,4 +16,8 @@ public class Snake {
     private String name;
     private int health;
     private List<Body> body;
+
+    public Body getHead() {
+        return this.body.get(0);
+    }
 }

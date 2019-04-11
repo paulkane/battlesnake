@@ -24,7 +24,7 @@ public class WallSafetyUTest {
 
     @Test
     public void givenImAtTheLeftCannotGoLeft() {
-        assertThat(wallSafety.isItSafe(MOVE.LEFT, battleSnakeRequest(snake(body(0, 0))))).isFalse();
+        assertThat(wallSafety.isItSafe(MOVE.LEFT, battleSnakeRequest(snake(body(0, 10))))).isFalse();
     }
 
     @Test

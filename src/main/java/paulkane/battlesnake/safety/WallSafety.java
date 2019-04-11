@@ -9,19 +9,13 @@ import paulkane.battlesnake.model.domain.MOVE;
 public class WallSafety implements MoveSafety {
     @Override
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
-        Body head = battleSnakeRequest.getYou().getBody().get(0);
+        Body head = battleSnakeRequest.getYou().getHead();
 
-        switch (move) {
-            case UP:
-                return head.getY() != 0;
-            case RIGHT:
-                return head.getX() < battleSnakeRequest.getBoard().getWidth() - 1;
-            case LEFT:
-                return head.getX() != 0;
-            case DOWN:
-                return head.getY() < battleSnakeRequest.getBoard().getHeight() - 1;
-        }
-
-        return false;
+        return switch (move) {
+            case UP -> head.getY() != 0;
+            case RIGHT -> head.getX() < battleSnakeRequest.getBoard().getWidth() - 1;
+            case LEFT -> head.getX() != 0;
+            case DOWN -> head.getY() < battleSnakeRequest.getBoard().getHeight() - 1;
+        };
     }
 }

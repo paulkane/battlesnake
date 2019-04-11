@@ -25,7 +25,7 @@ public class StrategyBasedMoveService implements MoveService {
     @Override
     public MoveResponse move(BattleSnakeRequest moveRequest) {
         MoveStrategy moveStrategy = moveStrategyFactory.moveStrategy(moveRequest.getYou().getName());
-
+        System.out.println(moveStrategy.getName());
         MOVE move = finalMove(moveStrategy.move(moveRequest), moveRequest);
 
         return MoveResponse.builder()

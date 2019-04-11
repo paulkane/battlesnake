@@ -14,27 +14,18 @@ public class SnakeSafety implements MoveSafety {
     @Override
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
 
-        Body head = battleSnakeRequest.getYou().getBody().get(0);
+        Body head = battleSnakeRequest.getYou().getHead();
 
         Body moveTo = Body.builder().x(head.getX()).y(head.getY()).build();
 
         switch (move) {
-            case UP:
-                moveTo.setY(moveTo.getY() - 1);
-                break;
-            case DOWN:
-                moveTo.setY(moveTo.getY() + 1);
-                break;
-            case RIGHT:
-                moveTo.setX(moveTo.getX() + 1);
-                break;
-            case LEFT:
-                moveTo.setX(moveTo.getX() - 1);
-                break;
+            case UP -> moveTo.setY(moveTo.getY() - 1);
+            case DOWN -> moveTo.setY(moveTo.getY() + 1);
+            case RIGHT -> moveTo.setX(moveTo.getX() + 1);
+            case LEFT -> moveTo.setX(moveTo.getX() - 1);
         }
 
         List<Snake> snakes = new ArrayList<>(battleSnakeRequest.getBoard().getSnakes());
-        snakes.add(battleSnakeRequest.getYou());
         return !isThereASnakeAt(moveTo, snakes);
     }
 

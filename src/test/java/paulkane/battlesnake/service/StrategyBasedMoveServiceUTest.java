@@ -6,6 +6,7 @@ import org.junit.Test;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.MoveResponse;
 import paulkane.battlesnake.model.domain.MOVE;
+import paulkane.battlesnake.model.domain.Snake;
 import paulkane.battlesnake.move.MoveStrategy;
 import paulkane.battlesnake.move.MoveStrategyFactory;
 import paulkane.battlesnake.safety.MoveSafety;
@@ -58,8 +59,9 @@ public class StrategyBasedMoveServiceUTest {
 
     @Test
     public void testCannotMoveUpWhenNotSafeBlockedByMySnake() {
+        Snake snake = snake(body(0, 0), body(0, 1));
         MoveResponse actualMove = strategyBasedMoveService.move(
-            battleSnakeRequest(snake(body(0, 0), body(0, 1)))
+            battleSnakeRequest(snake, snake)
         );
 
         assertThat(actualMove.getMove()).isEqualTo(MOVE.RIGHT);

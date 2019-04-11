@@ -1,29 +1,26 @@
 package paulkane.battlesnake.move;
 
+import org.springframework.stereotype.Component;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.domain.Body;
 import paulkane.battlesnake.model.domain.Food;
 import paulkane.battlesnake.model.domain.MOVE;
 
-public class NearestFoodStrategy implements MoveStrategy {
+@Component
+public class EagerFoodStrategy implements MoveStrategy {
 
-    private final MoveStrategyFactory moveStrategyFactory;
-    private final String moveFailedStrategy;
-
-    public NearestFoodStrategy(MoveStrategyFactory moveStrategyFactory, String moveFailedStrategy) {
-        this.moveStrategyFactory = moveStrategyFactory;
-        this.moveFailedStrategy = moveFailedStrategy;
+    public EagerFoodStrategy() {
     }
 
     @Override
     public String getName() {
-        return "food";
+        return "eager-food";
     }
 
     @Override
     public MOVE move(BattleSnakeRequest moveRequest) {
 
-        Body head = moveRequest.getYou().getBody().get(0);
+        Body head = moveRequest.getYou().getHead();
 
         MOVE moveTo = null;
         Food nearestFood = null;
@@ -45,7 +42,7 @@ public class NearestFoodStrategy implements MoveStrategy {
         }
 
         if (moveTo == null) {
-            moveTo = moveStrategyFactory.moveStrategy(moveFailedStrategy).move(moveRequest);
+            moveTo = MOVE.UP;
         }
 
         return moveTo;
