@@ -2,7 +2,7 @@
 FROM alpine
 
 COPY engine_0.2.23_Linux_x86_64.tar.gz /
-COPY snake-config.json /.snake-config.json
+# COPY snake-config.json /.snake-config.json
 
 RUN apk add --no-cache tar && \
     tar --warning=no-unknown-keyword -zxf engine_0.2.23_Linux_x86_64.tar.gz && \
@@ -10,4 +10,4 @@ RUN apk add --no-cache tar && \
 
 VOLUME /battlesnake
 
-CMD ["./engine", "server"]
+CMD ["./engine", "dev"]

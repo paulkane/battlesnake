@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 @Order(value = 999)
-public class HeadToHeadPrediction implements MovePrediction {
+public class HeadToHeadPrediction implements MoveSafety {
     @Override
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         Body moveTo = moveTo(move, battleSnakeRequest.getYou().getHead());

@@ -7,7 +7,6 @@ import paulkane.battlesnake.model.MoveResponse;
 import paulkane.battlesnake.model.domain.MOVE;
 import paulkane.battlesnake.move.MoveStrategy;
 import paulkane.battlesnake.move.MoveStrategyFactory;
-import paulkane.battlesnake.safety.MovePrediction;
 import paulkane.battlesnake.safety.MoveSafety;
 
 import java.util.ArrayList;
@@ -17,14 +16,11 @@ import java.util.List;
 public class StrategyBasedMoveService implements MoveService {
     private final MoveStrategyFactory moveStrategyFactory;
     private final List<MoveSafety> moveSafetyList;
-    private final List<MovePrediction> movePredictionList;
 
     public StrategyBasedMoveService(MoveStrategyFactory moveStrategyFactory,
-                                    List<MoveSafety> moveSafetyList,
-                                    List<MovePrediction> movePredictionList) {
+                                    List<MoveSafety> moveSafetyList) {
         this.moveStrategyFactory = moveStrategyFactory;
         this.moveSafetyList = moveSafetyList;
-        this.movePredictionList = movePredictionList;
     }
 
     @Override
@@ -44,7 +40,8 @@ public class StrategyBasedMoveService implements MoveService {
 
         MOVE attemptMove = move;
 
-        while (remainingMoves.size() > 0 && !isSafe(attemptMove, battleSnakeRequest)) {
+        while (remainingMoves.size() > 0
+            && isNotSafe(attemptMove, battleSnakeRequest)) {
             attemptMove = moveStrategyFactory.fallBackMoveStrategy().move(battleSnakeRequest);
 
             if (remainingMoves.contains(attemptMove)) {
@@ -54,34 +51,16 @@ public class StrategyBasedMoveService implements MoveService {
             }
         }
 
-        if (remainingMoves.size() > 0) {
-            List<MOVE> predictMove = new ArrayList<>(remainingMoves);
-            do {
-                attemptMove = predictMove.remove(0);
-            }
-            while (predictMove.size() > 0 && !isPredictSafe(attemptMove, battleSnakeRequest));
-        }
-
         return attemptMove;
     }
 
-    private boolean isPredictSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
-        for (MovePrediction movePrediction : movePredictionList) {
-            if (!movePrediction.isItSafe(move, battleSnakeRequest)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private boolean isSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
+    private boolean isNotSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         for (MoveSafety moveSafety : moveSafetyList) {
             if (!moveSafety.isItSafe(move, battleSnakeRequest)) {
-                return false;
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 }
