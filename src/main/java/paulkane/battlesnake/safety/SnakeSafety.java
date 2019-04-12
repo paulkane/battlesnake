@@ -1,5 +1,6 @@
 package paulkane.battlesnake.safety;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.domain.Body;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@Order(value = 1)
 public class SnakeSafety implements MoveSafety {
     @Override
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {

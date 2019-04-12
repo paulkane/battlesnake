@@ -1,11 +1,13 @@
 package paulkane.battlesnake.safety;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.domain.Body;
 import paulkane.battlesnake.model.domain.MOVE;
 
 @Component
+@Order(value = 1)
 public class WallSafety implements MoveSafety {
     @Override
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {

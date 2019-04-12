@@ -7,6 +7,8 @@ import paulkane.battlesnake.model.domain.MOVE;
 @Component
 public class HungryFoodStrategy implements MoveStrategy {
 
+    static final int HEALTH_THRESHOLD = 20;
+
     private final ClockWiseMoveStrategy clockWiseMoveStrategy;
     private final EagerFoodStrategy eagerFoodStrategy;
 
@@ -23,7 +25,7 @@ public class HungryFoodStrategy implements MoveStrategy {
 
     @Override
     public MOVE move(BattleSnakeRequest moveRequest) {
-        if (moveRequest.getYou().getHealth() > 20) {
+        if (moveRequest.getYou().getHealth() > HEALTH_THRESHOLD) {
             return clockWiseMoveStrategy.move(moveRequest);
         }
         return eagerFoodStrategy.move(moveRequest);

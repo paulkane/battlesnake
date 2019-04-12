@@ -11,15 +11,17 @@ import paulkane.battlesnake.model.domain.TAIL_TYPE;
 public class RandomSnakeStartService implements StartService {
 
     private final RandomStrategy randomStrategy;
+    private final HexColour hexColour;
 
-    public RandomSnakeStartService(RandomStrategy randomStrategy) {
+    public RandomSnakeStartService(RandomStrategy randomStrategy, HexColour hexColour) {
         this.randomStrategy = randomStrategy;
+        this.hexColour = hexColour;
     }
 
     @Override
     public StartResponse start(BattleSnakeRequest startRequest) {
         return StartResponse.builder()
-            .color(HexColour.getColour())
+            .color(hexColour.getColour())
             .headType(HEAD_TYPE.values()[randomStrategy.getNextInt(HEAD_TYPE.values().length)])
             .tailType(TAIL_TYPE.values()[randomStrategy.getNextInt(TAIL_TYPE.values().length)])
             .build();

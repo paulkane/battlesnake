@@ -12,7 +12,9 @@ import static org.mockito.Mockito.when;
 public class RandomSnakeStrategyBasedMoveServiceUTest {
 
     private final RandomStrategy randomStrategy = mock(RandomStrategy.class);
-    private final RandomSnakeStartService randomSnakeStartService = new RandomSnakeStartService(randomStrategy);
+    private final HexColour hexColour = new HexColour(randomStrategy);
+    private final RandomSnakeStartService randomSnakeStartService =
+        new RandomSnakeStartService(randomStrategy, hexColour);
 
     @Test
     public void testStart() {
@@ -23,6 +25,6 @@ public class RandomSnakeStrategyBasedMoveServiceUTest {
 
         assertThat(firstResponse.getHeadType()).isEqualTo(HEAD_TYPE.BELUGA);
         assertThat(firstResponse.getTailType()).isEqualTo(TAIL_TYPE.BOLT);
-        assertThat(firstResponse.getColor()).isEqualTo("#ff0000");
+        assertThat(firstResponse.getColor()).isEqualTo("#00ffff");
     }
 }

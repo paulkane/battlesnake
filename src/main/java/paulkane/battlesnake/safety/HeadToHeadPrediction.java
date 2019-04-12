@@ -1,5 +1,6 @@
 package paulkane.battlesnake.safety;
 
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import paulkane.battlesnake.model.BattleSnakeRequest;
 import paulkane.battlesnake.model.domain.Body;
@@ -10,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class HeadToHeadSafety implements MoveSafety {
+@Order(value = 999)
+public class HeadToHeadPrediction implements MovePrediction {
     @Override
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         Body moveTo = moveTo(move, battleSnakeRequest.getYou().getHead());

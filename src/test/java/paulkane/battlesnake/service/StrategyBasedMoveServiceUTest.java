@@ -9,6 +9,8 @@ import paulkane.battlesnake.model.domain.MOVE;
 import paulkane.battlesnake.model.domain.Snake;
 import paulkane.battlesnake.move.MoveStrategy;
 import paulkane.battlesnake.move.MoveStrategyFactory;
+import paulkane.battlesnake.safety.HeadToHeadPrediction;
+import paulkane.battlesnake.safety.MovePrediction;
 import paulkane.battlesnake.safety.MoveSafety;
 import paulkane.battlesnake.safety.SnakeSafety;
 import paulkane.battlesnake.safety.WallSafety;
@@ -29,8 +31,9 @@ public class StrategyBasedMoveServiceUTest {
     private final MoveStrategyFactory moveStrategyFactory = mock(MoveStrategyFactory.class);
     private final MoveStrategy moveStrategy = mock(MoveStrategy.class);
     private final List<MoveSafety> moveSafetyList = Lists.newArrayList(new WallSafety(), new SnakeSafety());
+    private final List<MovePrediction> movePredictionList = List.of(new HeadToHeadPrediction());
     private final StrategyBasedMoveService strategyBasedMoveService = new StrategyBasedMoveService(moveStrategyFactory,
-        moveSafetyList);
+        moveSafetyList, movePredictionList);
 
     @Before
     public void setup() {
@@ -40,21 +43,12 @@ public class StrategyBasedMoveServiceUTest {
     }
 
     @Test
-    public void testCanMoveUpWhenSafe() {
-        MoveResponse actualMove = strategyBasedMoveService.move(
-            battleSnakeRequest(snake(body(5, 5)))
-        );
-
-        assertThat(actualMove.getMove()).isEqualTo(MOVE.UP);
-    }
-
-    @Test
     public void testCannotMoveUpWhenNotSafeInTopRightCorner() {
         MoveResponse actualMove = strategyBasedMoveService.move(
             battleSnakeRequest(snake(body(14, 0), body(13, 0)))
         );
 
-        assertThat(actualMove.getMove()).isEqualTo(MOVE.DOWN);
+        assertThat(actualMove.getMove()).isNotEqualTo(MOVE.UP);
     }
 
     @Test
@@ -64,7 +58,7 @@ public class StrategyBasedMoveServiceUTest {
             battleSnakeRequest(snake, snake)
         );
 
-        assertThat(actualMove.getMove()).isEqualTo(MOVE.RIGHT);
+        assertThat(actualMove.getMove()).isNotEqualTo(MOVE.UP);
     }
 
     @Test
@@ -73,7 +67,7 @@ public class StrategyBasedMoveServiceUTest {
             battleSnakeRequest(snake(body(14, 14)), snake(body(14, 13)))
         );
 
-        assertThat(actualMove.getMove()).isEqualTo(MOVE.LEFT);
+        assertThat(actualMove.getMove()).isNotEqualTo(MOVE.UP);
     }
 
     @Test

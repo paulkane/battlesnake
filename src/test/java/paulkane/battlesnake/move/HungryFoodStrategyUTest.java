@@ -26,7 +26,7 @@ public class HungryFoodStrategyUTest {
     @Test
     public void useEagerFoodStrategy() {
         Snake snake = snake();
-        snake.setHealth(49);
+        snake.setHealth(HungryFoodStrategy.HEALTH_THRESHOLD-1);
         hungryFoodStrategy.move(battleSnakeRequest(snake));
         verify(eagerFoodStrategy).move(any(BattleSnakeRequest.class));
     }
