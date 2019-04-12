@@ -10,7 +10,6 @@ import paulkane.battlesnake.model.domain.TAIL_TYPE;
 @Service
 public class RandomSnakeStartService implements StartService {
 
-    private static final String RED = "#ff0000";
     private final RandomStrategy randomStrategy;
 
     public RandomSnakeStartService(RandomStrategy randomStrategy) {
@@ -20,7 +19,7 @@ public class RandomSnakeStartService implements StartService {
     @Override
     public StartResponse start(BattleSnakeRequest startRequest) {
         return StartResponse.builder()
-            .color(RED)
+            .color(HexColour.getColour())
             .headType(HEAD_TYPE.values()[randomStrategy.getNextInt(HEAD_TYPE.values().length)])
             .tailType(TAIL_TYPE.values()[randomStrategy.getNextInt(TAIL_TYPE.values().length)])
             .build();

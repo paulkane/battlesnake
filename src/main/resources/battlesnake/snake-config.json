@@ -1,0 +1,19 @@
+{
+  "width": 15,
+  "height": 15,
+  "food": 10,
+  "snakes": [
+    {
+      "name": "paulkane-random",
+      "url": "http://10.194.194.143:8080"
+    },
+    {
+      "name": "paulkane-hungry-snake",
+      "url": "http://10.194.194.143:8080"
+    },
+    {
+      "name": "paulkane-eager-snake",
+      "url": "http://10.194.194.143:8080"
+    }
+  ]
+}

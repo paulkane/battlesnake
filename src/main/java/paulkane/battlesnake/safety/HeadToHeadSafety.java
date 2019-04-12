@@ -15,12 +15,14 @@ public class HeadToHeadSafety implements MoveSafety {
     public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         Body moveTo = moveTo(move, battleSnakeRequest.getYou().getHead());
         String mySnake = battleSnakeRequest.getYou().getId();
+        int mySize = battleSnakeRequest.getYou().getBody().size();
 
         List<Body> moveAgain = moveAgain(moveTo);
 
         for (Snake otherSnake : battleSnakeRequest.getBoard().getSnakes()) {
             Body snakeHead = otherSnake.getHead();
-            if (otherSnake.getId().equals(mySnake)) {
+            int otherSnakeSize = otherSnake.getBody().size();
+            if (otherSnake.getId().equals(mySnake) || mySize > otherSnakeSize) {
                 continue;
             }
 
