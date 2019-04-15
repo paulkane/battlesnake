@@ -14,7 +14,7 @@ import java.util.List;
 @Order(value = 1)
 public class SnakeSafety implements MoveSafety {
     @Override
-    public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
+    public SAFE isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
 
         Body head = battleSnakeRequest.getYou().getHead();
 
@@ -28,18 +28,21 @@ public class SnakeSafety implements MoveSafety {
         }
 
         List<Snake> snakes = new ArrayList<>(battleSnakeRequest.getBoard().getSnakes());
-        return !isThereASnakeAt(moveTo, snakes);
+        return isItEmpty(moveTo, snakes);
     }
 
-    private boolean isThereASnakeAt(Body moveTo, List<Snake> snakes) {
+    private SAFE isItEmpty(Body moveTo, List<Snake> snakes) {
         for (Snake snake : snakes) {
             for (Body body : snake.getBody()) {
                 if (body.equals(moveTo)) {
-                    return true;
+                    if (body.equals(snake.getTail())) {
+                        return SAFE.MAYBE;
+                    }
+                    return SAFE.NO;
                 }
             }
         }
 
-        return false;
+        return SAFE.YES;
     }
 }

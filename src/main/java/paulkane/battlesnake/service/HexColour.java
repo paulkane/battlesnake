@@ -29,8 +29,8 @@ public class HexColour {
         this.randomStrategy = randomStrategy;
     }
 
-    public String getColour() {
-        Color color = AVAILABLE_COLOURS.remove(randomStrategy.getNextInt(AVAILABLE_COLOURS.size()));
+    String getColour() {
+        Color color = AVAILABLE_COLOURS.get(randomStrategy.getNextInt(AVAILABLE_COLOURS.size()));
         return "#" + Integer.toHexString(color.getRGB()).substring(2);
     }
 }

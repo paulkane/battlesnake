@@ -10,11 +10,14 @@ import paulkane.battlesnake.model.domain.Snake;
 import java.util.ArrayList;
 import java.util.List;
 
+import static paulkane.battlesnake.safety.SAFE.MAYBE;
+import static paulkane.battlesnake.safety.SAFE.YES;
+
 @Component
 @Order(value = 999)
 public class HeadToHeadPrediction implements MoveSafety {
     @Override
-    public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
+    public SAFE isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         Body moveTo = moveTo(move, battleSnakeRequest.getYou().getHead());
         String mySnake = battleSnakeRequest.getYou().getId();
         int mySize = battleSnakeRequest.getYou().getBody().size();
@@ -30,12 +33,12 @@ public class HeadToHeadPrediction implements MoveSafety {
 
             for (Body targetSpace : moveAgain) {
                 if (snakeHead.equals(targetSpace)) {
-                    return false;
+                    return MAYBE;
                 }
             }
         }
 
-        return true;
+        return YES;
     }
 
     private List<Body> moveAgain(Body head) {

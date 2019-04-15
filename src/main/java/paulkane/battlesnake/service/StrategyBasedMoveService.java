@@ -8,9 +8,13 @@ import paulkane.battlesnake.model.domain.MOVE;
 import paulkane.battlesnake.move.MoveStrategy;
 import paulkane.battlesnake.move.MoveStrategyFactory;
 import paulkane.battlesnake.safety.MoveSafety;
+import paulkane.battlesnake.safety.SAFE;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static paulkane.battlesnake.safety.SAFE.MAYBE;
+import static paulkane.battlesnake.safety.SAFE.YES;
 
 @Service
 public class StrategyBasedMoveService implements MoveService {
@@ -36,12 +40,19 @@ public class StrategyBasedMoveService implements MoveService {
 
     private MOVE finalMove(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         List<MOVE> remainingMoves = new ArrayList<>(List.of(MOVE.values()));
+        List<MOVE> maybeSafe = new ArrayList<>();
         remainingMoves.remove(move);
 
         MOVE attemptMove = move;
 
-        while (remainingMoves.size() > 0
-            && isNotSafe(attemptMove, battleSnakeRequest)) {
+        while (remainingMoves.size() > 0) {
+            SAFE safe = safe(attemptMove, battleSnakeRequest);
+            if (safe.equals(YES)) {
+                break;
+            }
+            if (safe.equals(MAYBE)) {
+                maybeSafe.add(attemptMove);
+            }
             attemptMove = moveStrategyFactory.fallBackMoveStrategy().move(battleSnakeRequest);
 
             if (remainingMoves.contains(attemptMove)) {
@@ -51,16 +62,21 @@ public class StrategyBasedMoveService implements MoveService {
             }
         }
 
+        if (remainingMoves.size() == 0 && maybeSafe.size() > 0) {
+            return maybeSafe.get(0);
+        }
+
         return attemptMove;
     }
 
-    private boolean isNotSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
+    private SAFE safe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         for (MoveSafety moveSafety : moveSafetyList) {
-            if (!moveSafety.isItSafe(move, battleSnakeRequest)) {
-                return true;
+            SAFE isSafe = moveSafety.isItSafe(move, battleSnakeRequest);
+            if (!isSafe.equals(YES)) {
+                return isSafe;
             }
         }
 
-        return false;
+        return YES;
     }
 }

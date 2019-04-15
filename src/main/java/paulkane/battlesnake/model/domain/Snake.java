@@ -1,5 +1,6 @@
 package paulkane.battlesnake.model.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,13 @@ public class Snake {
     private int health;
     private List<Body> body;
 
+    @JsonIgnore
     public Body getHead() {
         return this.body.get(0);
+    }
+
+    @JsonIgnore
+    public Body getTail() {
+        return this.body.get(this.body.size() - 1);
     }
 }

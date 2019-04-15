@@ -9,6 +9,7 @@ import paulkane.battlesnake.model.domain.MOVE;
 import paulkane.battlesnake.model.domain.Snake;
 import paulkane.battlesnake.move.MoveStrategy;
 import paulkane.battlesnake.move.MoveStrategyFactory;
+import paulkane.battlesnake.safety.HeadToHeadPrediction;
 import paulkane.battlesnake.safety.MoveSafety;
 import paulkane.battlesnake.safety.SnakeSafety;
 import paulkane.battlesnake.safety.WallSafety;
@@ -28,7 +29,8 @@ public class StrategyBasedMoveServiceUTest {
 
     private final MoveStrategyFactory moveStrategyFactory = mock(MoveStrategyFactory.class);
     private final MoveStrategy moveStrategy = mock(MoveStrategy.class);
-    private final List<MoveSafety> moveSafetyList = Lists.newArrayList(new WallSafety(), new SnakeSafety());
+    private final List<MoveSafety> moveSafetyList =
+        Lists.newArrayList(new WallSafety(), new SnakeSafety(), new HeadToHeadPrediction());
     private final StrategyBasedMoveService strategyBasedMoveService = new StrategyBasedMoveService(moveStrategyFactory,
         moveSafetyList);
 
@@ -72,8 +74,8 @@ public class StrategyBasedMoveServiceUTest {
         MoveResponse actualMove = strategyBasedMoveService.move(
             battleSnakeRequest(
                 snake(body(14, 0)),
-                snake(body(14, 1)),
-                snake(body(13, 0))
+                snake(body(14, 1), body(14, 2)),
+                snake(body(13, 0), body(12, 0))
             )
         );
 

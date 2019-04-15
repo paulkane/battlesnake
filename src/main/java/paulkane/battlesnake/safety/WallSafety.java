@@ -10,14 +10,14 @@ import paulkane.battlesnake.model.domain.MOVE;
 @Order(value = 1)
 public class WallSafety implements MoveSafety {
     @Override
-    public boolean isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
+    public SAFE isItSafe(MOVE move, BattleSnakeRequest battleSnakeRequest) {
         Body head = battleSnakeRequest.getYou().getHead();
 
         return switch (move) {
-            case UP -> head.getY() != 0;
-            case RIGHT -> head.getX() < battleSnakeRequest.getBoard().getWidth() - 1;
-            case LEFT -> head.getX() != 0;
-            case DOWN -> head.getY() < battleSnakeRequest.getBoard().getHeight() - 1;
+            case UP -> head.getY() != 0 ? SAFE.YES : SAFE.NO;
+            case RIGHT -> head.getX() < battleSnakeRequest.getBoard().getWidth() - 1 ? SAFE.YES : SAFE.NO;
+            case LEFT -> head.getX() != 0 ? SAFE.YES : SAFE.NO;
+            case DOWN -> head.getY() < battleSnakeRequest.getBoard().getHeight() - 1 ? SAFE.YES : SAFE.NO;
         };
     }
 }
