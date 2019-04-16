@@ -35,7 +35,7 @@ git clone https://github.com/battlesnakeio/board
 
 change the `entrypoint.sh` for the nginx server to listen to `3009`
 
-####Dockerfile
+#### Dockerfile
 ```dockerfile
 FROM node:10.7.0-alpine AS build
 
