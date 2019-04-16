@@ -26,30 +26,17 @@ make sure you name your snake the same as your Strategy name
 
 ## Docker everything
 
-There is a Dockerfile provided for the engine in 
-`src/main/docker/`
+The simplest way to get the engine and the board running is:
 
-### battle snake board
+* open two terminals
 
-git clone https://github.com/battlesnakeio/board
-
-change the `entrypoint.sh` for the nginx server to listen to `3009`
-
-#### Dockerfile
-```dockerfile
-FROM node:10.7.0-alpine AS build
-
-COPY . .
-RUN npm i
-RUN npm run build
-
-FROM nginx:1.15.2-alpine
-RUN apk add --no-cache curl
-
-COPY --from=build ./build/ /usr/share/nginx/html
-COPY ./entrypoint.sh /bin/entrypoint.sh
-
-ENTRYPOINT [ "/bin/entrypoint.sh" ]
+### battlesnake engine
 ```
+docker run --rm --name battlesnake-server -p3004:3004 -p3005:3005 -p3010:3010  battlesnakeio/engine engine dev
+```
+### battlesnake board
 
+```
+docker run --rm --name battlesnake-board -p3009:80  battlesnakeio/board
+```
 
